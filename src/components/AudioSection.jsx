@@ -2,176 +2,131 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Play, Pause, Volume2, Music, Mic, Waves } from 'lucide-react'
 
-// Animated waveform component (purely visual)
-function Waveform({ playing, color = '#4f70f5' }) {
-  const bars = 48
+function Waveform({ playing, color }) {
+  const bars = 40
   return (
-    <div className="flex items-center gap-[3px] h-12 px-4">
+    <div className="flex items-center gap-[3px] h-10 px-3">
       {Array.from({ length: bars }, (_, i) => (
         <motion.div
           key={i}
           className="rounded-full flex-shrink-0"
-          style={{ width: 4, backgroundColor: color, opacity: 0.7 + (i % 3) * 0.1 }}
-          animate={playing ? {
-            height: [4, 8 + Math.sin(i * 0.5) * 20 + 10, 4],
-          } : {
-            height: 4 + Math.sin(i * 0.5) * 8 + 4,
-          }}
-          transition={playing ? {
-            duration: 0.8 + (i % 5) * 0.1,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: i * 0.02,
-          } : {}}
+          style={{ width: 3, backgroundColor: color, opacity: 0.6 + (i % 3) * 0.15 }}
+          animate={playing ? { height: [3, 6 + Math.sin(i * 0.5) * 16 + 8, 3] } : { height: 3 + Math.abs(Math.sin(i * 0.4)) * 8 }}
+          transition={playing ? { duration: 0.7 + (i % 4) * 0.1, repeat: Infinity, ease: 'easeInOut', delay: i * 0.025 } : {}}
         />
       ))}
     </div>
   )
 }
 
-const audioItems = [
+const items = [
   {
     id: 'jingle',
     icon: Music,
-    title: 'Reklamjingle – Bergström Bygg',
-    desc: 'En 15-sekunds jingle för TV- och radiospot. Glad, professionell och minnesvärd ton med akustisk gitarr och kör.',
+    title: 'Reklamjingle',
+    sub: 'Bergström Bygg · 15 sek',
+    desc: 'En 15-sekunders jingle för TV och radiospot. Glad, professionell och minnesvärd ton med akustisk gitarr.',
     tool: 'Suno AI',
-    duration: '0:15',
-    color: '#4f70f5',
-    lightColor: '#7b97ff',
-    style: 'Akustisk pop, dur-tonart, ljus känsla',
-    lyrics: '"Bergström Bygg — vi bygger ditt drömhem / Med hjärta och händer / i Göteborg sen länge. / Ring oss idag!"',
-    usage: 'Radio-spot, YouTube-annons, TikTok',
+    color: '#c2410c',
+    style: 'Akustisk pop, ljus känsla, dur-tonart',
+    lyrics: '"Bergström Bygg — vi bygger ditt drömhem / Med hjärta och händer i Göteborg."',
   },
   {
-    id: 'voiceover',
+    id: 'vo',
     icon: Mic,
-    title: 'AI Voiceover – Reklamfilm',
-    desc: 'AI-genererad svensk röstöver för reklamfilmen. Neutral, välvårdad rikssvenska — klar och trovärdig.',
+    title: 'AI Voiceover',
+    sub: 'Reklamfilm · 52 sek',
+    desc: 'AI-genererad svensk röstöver för reklamfilmen. Neutral rikssvenska, klar och trovärdig ton.',
     tool: 'ElevenLabs',
-    duration: '0:52',
-    color: '#7c3aed',
-    lightColor: '#a855f7',
-    style: 'Manlig röst, lugn takt, professionell ton',
+    color: '#1d4ed8',
+    style: 'Manlig röst, lugn takt, professionell',
     lyrics: '"Varje vecka skriver Karl Bergström offerter i timmar..."',
-    usage: 'Reklamfilm voiceover',
   },
   {
     id: 'ambient',
     icon: Waves,
-    title: 'Bakgrundsmusik – Hemsida',
-    desc: 'Subtil ambient musik för en eventuell interaktiv demo på hemsidan. Inte påträngande, men skapar rätt känsla.',
+    title: 'Bakgrundsmusik',
+    sub: 'Hemsida ambient · 2:30',
+    desc: 'Subtil ambient musik för hemsidans demo-sektion. Inte påträngande men skapar rätt känsla.',
     tool: 'Udio AI',
-    duration: '2:30',
-    color: '#00d4ff',
-    lightColor: '#67e8f9',
-    style: 'Elektronisk ambient, 90 BPM, B-dur',
-    lyrics: 'Instrumentalt — inga text',
-    usage: 'Hemsida ambient, demo-video bgm',
+    color: '#0891b2',
+    style: 'Elektronisk ambient, 90 BPM',
+    lyrics: 'Instrumentalt',
   },
 ]
 
-function AudioPlayer({ item }) {
+function Player({ item }) {
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
-  const intervalRef = useRef(null)
+  const ref = useRef(null)
 
   const toggle = () => {
     if (playing) {
-      clearInterval(intervalRef.current)
+      clearInterval(ref.current)
       setPlaying(false)
     } else {
       setPlaying(true)
-      intervalRef.current = setInterval(() => {
-        setProgress(p => {
-          if (p >= 100) {
-            clearInterval(intervalRef.current)
-            setPlaying(false)
-            return 0
-          }
-          return p + 0.5
+      ref.current = setInterval(() => {
+        setProgress((p) => {
+          if (p >= 100) { clearInterval(ref.current); setPlaying(false); return 0 }
+          return p + 0.4
         })
       }, 50)
     }
   }
-
-  useEffect(() => () => clearInterval(intervalRef.current), [])
+  useEffect(() => () => clearInterval(ref.current), [])
 
   return (
-    <div className="bg-bg-card border border-bg-border rounded-2xl overflow-hidden hover:border-accent-blue/30 transition-colors">
-      {/* Header */}
+    <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-md transition-shadow">
       <div className="p-6">
         <div className="flex items-start gap-4">
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: item.color + '20', border: `1px solid ${item.color}30` }}
-          >
-            <item.icon size={22} style={{ color: item.lightColor }} />
+          <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: item.color + '18', border: `1px solid ${item.color}28` }}>
+            <item.icon size={20} style={{ color: item.color }} />
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between mb-1">
-              <h3 className="text-white font-bold">{item.title}</h3>
-              <span className="text-gray-500 text-sm">{item.duration}</span>
-            </div>
-            <p className="text-gray-400 text-sm">{item.desc}</p>
+          <div>
+            <h3 className="text-stone-900 font-bold">{item.title}</h3>
+            <p className="text-stone-400 text-xs mb-1">{item.sub}</p>
+            <p className="text-stone-500 text-sm">{item.desc}</p>
           </div>
         </div>
       </div>
 
-      {/* Waveform player */}
-      <div className="border-t border-bg-border bg-bg-secondary/50">
-        <div className="flex items-center gap-3 px-4 py-3">
+      <div className="border-t border-border bg-bg-primary/60 px-4 py-3">
+        <div className="flex items-center gap-3">
           <button
             onClick={toggle}
-            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all hover:scale-110 active:scale-95"
+            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 hover:opacity-90 active:scale-95 transition-all"
             style={{ backgroundColor: item.color }}
           >
             {playing
-              ? <Pause size={16} className="text-white" fill="white" />
-              : <Play size={16} className="text-white ml-0.5" fill="white" />}
+              ? <Pause size={14} className="text-white" fill="white" />
+              : <Play size={14} className="text-white ml-0.5" fill="white" />}
           </button>
-
           <div className="flex-1 overflow-hidden">
             <Waveform playing={playing} color={item.color} />
           </div>
-
-          <Volume2 size={16} className="text-gray-500 flex-shrink-0" />
+          <Volume2 size={14} className="text-stone-400 flex-shrink-0" />
         </div>
-
-        {/* Progress bar */}
-        <div className="h-1 bg-bg-border mx-4 mb-3 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full rounded-full"
-            style={{ width: `${progress}%`, backgroundColor: item.color }}
-            transition={{ duration: 0.1 }}
-          />
+        <div className="mx-1 mt-2 mb-1 h-1 bg-border rounded-full overflow-hidden">
+          <div className="h-full rounded-full transition-all duration-100" style={{ width: `${progress}%`, backgroundColor: item.color }} />
         </div>
-
-        <div className="text-center text-xs text-gray-600 pb-2 pb-3">
-          🔇 Audio-placeholder — i produktion skapas verklig ljudfil med {item.tool}
-        </div>
+        <p className="text-center text-stone-400 text-xs pt-1">Simulerat · {item.tool} i produktion</p>
       </div>
 
-      {/* Meta */}
-      <div className="px-6 pb-6">
-        <div className="grid grid-cols-3 gap-3 mt-4">
-          <div className="bg-bg-secondary rounded-lg p-3 border border-bg-border text-center">
-            <div className="text-gray-500 text-xs mb-1">Verktyg</div>
-            <div className="text-white text-xs font-medium">{item.tool}</div>
+      <div className="px-6 pb-6 pt-4">
+        <div className="grid grid-cols-2 gap-2 mb-3">
+          <div className="bg-bg-primary rounded-lg p-3 border border-border">
+            <div className="text-stone-400 text-xs mb-1">Verktyg</div>
+            <div className="text-stone-800 text-xs font-semibold">{item.tool}</div>
           </div>
-          <div className="bg-bg-secondary rounded-lg p-3 border border-bg-border text-center">
-            <div className="text-gray-500 text-xs mb-1">Stil</div>
-            <div className="text-white text-xs font-medium truncate">{item.style.split(',')[0]}</div>
-          </div>
-          <div className="bg-bg-secondary rounded-lg p-3 border border-bg-border text-center">
-            <div className="text-gray-500 text-xs mb-1">Användning</div>
-            <div className="text-white text-xs font-medium truncate">{item.usage.split(',')[0]}</div>
+          <div className="bg-bg-primary rounded-lg p-3 border border-border">
+            <div className="text-stone-400 text-xs mb-1">Stil</div>
+            <div className="text-stone-800 text-xs font-semibold truncate">{item.style.split(',')[0]}</div>
           </div>
         </div>
-
-        <div className="mt-4 bg-bg-secondary rounded-lg p-4 border border-bg-border">
-          <div className="text-gray-500 text-xs mb-2 font-medium">Text / beskrivning</div>
-          <p className="text-gray-300 text-sm italic">{item.lyrics}</p>
+        <div className="bg-bg-primary rounded-lg p-3 border border-border">
+          <div className="text-stone-400 text-xs mb-1">Text</div>
+          <p className="text-stone-600 text-xs italic">{item.lyrics}</p>
         </div>
       </div>
     </div>
@@ -180,39 +135,34 @@ function AudioPlayer({ item }) {
 
 export default function AudioSection() {
   return (
-    <section className="py-24 relative">
-      <div className="absolute inset-0 bg-bg-secondary" />
-      <div className="orb w-[500px] h-[500px] bg-accent-cyan bottom-[0%] left-[-150px]" style={{ opacity: 0.05 }} />
-
-      <div className="relative max-w-7xl mx-auto px-6">
+    <section className="py-20 bg-white border-y border-border">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <span className="section-label mb-4 block">Ljud & röst</span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
-            Ljud som bygger
-            <br />
-            <span className="gradient-text">varumärket</span>
+          <span className="section-label mb-3 block">Ljud och röst</span>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 text-stone-900">
+            Ljud som bygger varumärket
           </h2>
-          <p className="text-gray-400 text-xl max-w-2xl mx-auto">
-            Från reklamjingle till professionell voiceover — allt skapas med AI
-            och anpassas för att passa Bergström Byggsatt ton och målgrupp.
+          <p className="text-stone-500 text-xl max-w-2xl mx-auto">
+            Från reklamjingle till professionell voiceover. Allt skapat med AI och
+            anpassat för Bergström Byggsatt ton och målgrupp.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {audioItems.map((item, i) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          {items.map((item, i) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.45, delay: i * 0.1 }}
             >
-              <AudioPlayer item={item} />
+              <Player item={item} />
             </motion.div>
           ))}
         </div>

@@ -1,112 +1,88 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Phone, Calendar, MessageSquare } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowRight, Phone, Mail, Calendar } from 'lucide-react'
 
 export default function CTASection() {
   return (
-    <section id="kontakt" className="py-24 relative overflow-hidden">
-      {/* Dramatic background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-accent-blue/10 via-bg-primary to-accent-purple/10" />
-        <div className="orb w-[700px] h-[700px] bg-accent-blue top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ opacity: 0.08 }} />
-      </div>
+    <section id="kontakt" className="py-20 bg-stone-900 relative overflow-hidden">
+      {/* Subtle stripe accent */}
+      <div className="absolute inset-0 stripe-pattern opacity-30" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-accent-orange" />
 
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
         >
-          <span className="section-label mb-6 block">Redo att börja?</span>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-tight">
+          <span className="inline-block text-accent-orange text-xs font-bold tracking-widest uppercase mb-6">Redo att börja?</span>
+          <h2 className="text-5xl md:text-6xl font-black tracking-tight mb-7 leading-tight text-white">
             Fyll din kalender
             <br />
             <span className="gradient-text">med rätt kunder.</span>
           </h2>
-          <p className="text-gray-400 text-2xl mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-stone-400 text-xl mb-12 max-w-xl mx-auto leading-relaxed">
             Boka ett kostnadsfritt 45-minuterssamtal. Vi analyserar din situation
             och berättar exakt hur Konstrukt kan hjälpa ditt företag.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
+          transition={{ delay: 0.2 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
         >
-          <a
-            href="mailto:hej@konstrukt.ai"
-            className="bg-accent-blue hover:bg-accent-blueLight text-white font-bold px-10 py-5 rounded-xl transition-all duration-200 glow-blue-strong text-xl flex items-center gap-3 justify-center group"
+          <Link
+            to="/kundcase"
+            className="bg-accent-orange hover:bg-accent-orangeLight text-white font-bold px-9 py-4 rounded-xl transition-colors shadow-card-md text-lg flex items-center gap-2 justify-center group"
           >
-            <Calendar size={22} />
+            <Calendar size={20} />
             Boka kostnadsfritt samtal
-            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </a>
+            <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
+          </Link>
           <a
             href="tel:+46700000000"
-            className="border border-bg-border hover:border-accent-blue/50 text-gray-300 hover:text-white font-bold px-10 py-5 rounded-xl transition-all duration-200 text-xl flex items-center gap-3 justify-center"
+            className="border border-stone-700 hover:border-stone-500 text-stone-300 hover:text-white font-bold px-9 py-4 rounded-xl transition-colors text-lg flex items-center gap-2 justify-center"
           >
-            <Phone size={22} />
+            <Phone size={20} />
             Ring oss direkt
           </a>
         </motion.div>
 
-        {/* Trust signals */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-8 text-gray-500 text-sm"
+          transition={{ delay: 0.35 }}
+          className="flex flex-wrap justify-center gap-6 text-stone-500 text-sm mb-14"
         >
-          {[
-            '✓ Inga bindningstider',
-            '✓ Setup på 2–3 veckor',
-            '✓ Avbryt när du vill',
-            '✓ Dedikerad kontaktperson',
-          ].map((t) => (
-            <span key={t} className="text-gray-400">{t}</span>
+          {['Inga bindningstider', 'Setup på 2-3 veckor', 'Avbryt när du vill', 'Dedikerad kontaktperson'].map((t) => (
+            <span key={t} className="flex items-center gap-1.5">
+              <span className="text-accent-orange font-bold">✓</span> {t}
+            </span>
           ))}
         </motion.div>
 
-        {/* Contact options */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4"
+          transition={{ delay: 0.45 }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
         >
           {[
-            {
-              icon: Calendar,
-              title: 'Boka online',
-              value: 'konstrukt.ai/boka',
-              desc: 'Välj tid i kalendern',
-            },
-            {
-              icon: Phone,
-              title: 'Ring oss',
-              value: '070-XXX XX XX',
-              desc: 'Mån–Fre 8–17',
-            },
-            {
-              icon: MessageSquare,
-              title: 'Skicka e-post',
-              value: 'hej@konstrukt.ai',
-              desc: 'Svar inom 24h',
-            },
+            { icon: Calendar, title: 'Boka online', value: 'konstrukt.ai/boka', desc: 'Välj tid i kalendern' },
+            { icon: Phone,    title: 'Ring oss',    value: '070-XXX XX XX',     desc: 'Mån-Fre 8-17' },
+            { icon: Mail,     title: 'E-post',      value: 'hej@konstrukt.ai',  desc: 'Svar inom 24h' },
           ].map(({ icon: Icon, title, value, desc }) => (
-            <div
-              key={title}
-              className="bg-bg-card border border-bg-border rounded-xl p-5 text-center hover:border-accent-blue/30 transition-colors"
-            >
-              <Icon size={20} className="text-accent-blueLight mx-auto mb-2" />
-              <div className="text-gray-500 text-xs mb-1">{title}</div>
+            <div key={title} className="bg-stone-800 border border-stone-700 rounded-xl p-5 text-center hover:border-stone-600 transition-colors">
+              <Icon size={18} className="text-accent-orange mx-auto mb-2" />
+              <div className="text-stone-500 text-xs mb-1">{title}</div>
               <div className="text-white font-semibold text-sm">{value}</div>
-              <div className="text-gray-600 text-xs mt-1">{desc}</div>
+              <div className="text-stone-600 text-xs mt-1">{desc}</div>
             </div>
           ))}
         </motion.div>
