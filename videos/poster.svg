@@ -6,8 +6,6 @@
     </linearGradient>
   </defs>
   <rect width="1280" height="720" fill="url(#g)"/>
-  <text x="640" y="340" text-anchor="middle" fill="#ffffff" font-family="Inter, sans-serif" font-size="64" font-weight="900">Konstrukt</text>
-  <text x="640" y="400" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-size="22" font-weight="600" letter-spacing="6">REKLAMFILM • 60 SEK</text>
-  <circle cx="640" cy="520" r="48" fill="#ea580c"/>
-  <polygon points="628,500 668,520 628,540" fill="white"/>
+  <text x="640" y="370" text-anchor="middle" fill="#ffffff" font-family="Inter, sans-serif" font-size="72" font-weight="900">Konstrukt</text>
+  <text x="640" y="430" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-size="22" font-weight="600" letter-spacing="6">REKLAMFILM • 40 SEK</text>
 </svg>
