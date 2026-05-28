@@ -7,7 +7,7 @@ const links = [
   { label: 'Start', to: '/' },
   { label: 'Tjänster', to: '/tjanster' },
   { label: 'Kundcase', to: '/kundcase' },
-  { label: 'Så använde jag AI', to: '/om-ai' },
+  { label: 'Så här gjorde jag', to: '/om-ai' },
 ]
 
 export default function Navbar() {

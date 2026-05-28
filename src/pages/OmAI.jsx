@@ -13,9 +13,9 @@ function PageHero() {
         >
           <span className="section-label mb-3 block">Bakom kulisserna</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tight mb-5 text-stone-900">
-            Så använde jag AI
+            Så här gjorde jag
             <br />
-            <span className="gradient-text">för att bygga det här</span>
+            <span className="gradient-text">det här</span>
           </h1>
           <p className="text-stone-500 text-xl max-w-2xl mx-auto">
             Vilka verktyg jag använde, vad som blev bra och vad jag fick göra om.

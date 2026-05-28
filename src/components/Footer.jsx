@@ -43,7 +43,7 @@ export default function Footer() {
               {[
                 { label: 'Start', to: '/' },
                 { label: 'Kundcase', to: '/kundcase' },
-                { label: 'Så använde jag AI', to: '/om-ai' },
+                { label: 'Så här gjorde jag', to: '/om-ai' },
                 { label: 'Boka samtal', to: '/kundcase' },
               ].map(({ label, to }) => (
                 <li key={label}>
