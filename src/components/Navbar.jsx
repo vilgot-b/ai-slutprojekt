@@ -4,10 +4,10 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, HardHat } from 'lucide-react'
 
 const links = [
+  { label: 'Start', to: '/' },
   { label: 'Tjänster', to: '/tjanster' },
   { label: 'Kundcase', to: '/kundcase' },
-  { label: 'AI-material', to: '/material' },
-  { label: 'Om AI', to: '/om-ai' },
+  { label: 'Så använde vi AI', to: '/om-ai' },
 ]
 
 export default function Navbar() {
@@ -40,6 +40,7 @@ export default function Navbar() {
             <NavLink
               key={l.to}
               to={l.to}
+              end={l.to === '/'}
               className={({ isActive }) =>
                 `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   isActive
@@ -83,6 +84,7 @@ export default function Navbar() {
                 <NavLink
                   key={l.to}
                   to={l.to}
+                  end={l.to === '/'}
                   className={({ isActive }) =>
                     `px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       isActive ? 'bg-accent-orangePale text-accent-orange' : 'text-stone-700 hover:bg-bg-secondary'

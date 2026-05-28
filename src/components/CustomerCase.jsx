@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { TrendingUp, Clock, Users, CheckCircle, Star } from 'lucide-react'
+import { TrendingUp, Clock, Users, CheckCircle, Star, Copy, Check, Sparkles, Music, Mic, Play, Pause } from 'lucide-react'
+import { BuildingNight, FacebookAd, Logo, CampaignBanner, ImageCard } from './CaseImages'
 
 const results = [
   { value: '+340%', label: 'Fler skickade offerter', icon: TrendingUp },
@@ -8,10 +10,96 @@ const results = [
   { value: '92%', label: 'Offertacceptansgrad', icon: CheckCircle },
 ]
 
+const emailText = `Hej Maria!
+
+Tack för att du kontaktade Bergström Bygg angående din tillbyggnad i Partille.
+
+Sammanfattning:
+• Tillbyggnad: 20 kvm, källarplan, altan
+• Beräknad arbetstid: 6-8 veckor
+• Prisintervall: 285 000 - 310 000 kr inkl. moms
+
+Vi har god tillgänglighet från och med vecka 14. Boka gärna ett kostnadsfritt
+besiktningsbesök via länken nedan.
+
+👉 bergströmbygg.se/boka
+
+Har du frågor? Ring direkt på 073-XXX XX XX.
+
+Bästa hälsningar,
+Karl Bergström
+Bergström Bygg AB`
+
+const socialText = `🏠 Drömmer du om mer plats hemma i sommar?
+
+Vi på Bergström Bygg bygger tillbyggnader, uterum och altaner i hela Göteborgsregionen.
+
+✅ Offert inom 24 timmar
+✅ Certifierade snickare med 13 år erfarenhet
+✅ Fast pris utan överraskningar
+
+Just nu har vi 3 platser kvar i junischemat.
+
+📍 Göteborg · Mölndal · Kungsbacka · Partille
+
+#tillbyggnad #snickeri #Göteborg #renovering`
+
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false)
+  const copy = () => {
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+  return (
+    <button onClick={copy} className="flex items-center gap-1.5 text-xs text-stone-400 hover:text-accent-orange transition-colors">
+      {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
+      {copied ? 'Kopierat!' : 'Kopiera'}
+    </button>
+  )
+}
+
+function FakeAudio({ icon: Icon, title, sub, color }) {
+  const [playing, setPlaying] = useState(false)
+  return (
+    <div className="bg-white border border-border rounded-xl p-4 flex items-center gap-3 shadow-card">
+      <button
+        onClick={() => setPlaying(!playing)}
+        className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform"
+        style={{ backgroundColor: color }}
+      >
+        {playing
+          ? <Pause size={14} className="text-white" fill="white"/>
+          : <Play size={14} className="text-white ml-0.5" fill="white"/>}
+      </button>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <Icon size={12} style={{ color }}/>
+          <span className="text-stone-900 font-semibold text-sm truncate">{title}</span>
+        </div>
+        <div className="flex items-center gap-[2px] h-4">
+          {Array.from({ length: 28 }, (_, i) => (
+            <motion.div
+              key={i}
+              className="flex-shrink-0 rounded-full"
+              style={{ width: 2, backgroundColor: color, opacity: 0.6 }}
+              animate={playing ? { height: [2, 4 + Math.sin(i * 0.5) * 12 + 4, 2] } : { height: 2 + Math.abs(Math.sin(i * 0.4)) * 6 }}
+              transition={playing ? { duration: 0.6 + (i % 4) * 0.08, repeat: Infinity, ease: 'easeInOut', delay: i * 0.02 } : {}}
+            />
+          ))}
+        </div>
+      </div>
+      <span className="text-stone-400 text-xs">{sub}</span>
+    </div>
+  )
+}
+
 export default function CustomerCase() {
   return (
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-6">
+
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,8 +113,25 @@ export default function CustomerCase() {
           <p className="text-stone-400 text-xl">Göteborg · Villarenoveringar och tillbyggnader</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 mb-10">
-          {/* Problem */}
+        {/* ── Featured image: brand identity ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <ImageCard
+            badge="Varumärke"
+            tool="Adobe Firefly + Midjourney"
+            title="Nytt visuellt varumärke"
+            caption="Det första vi gjorde åt Bergström Bygg var att uppdatera deras visuella identitet. AI-genererad logotyp och färgpalett anpassad för byggbranschen i Göteborgsområdet."
+          >
+            <Logo />
+          </ImageCard>
+        </motion.div>
+
+        {/* ── Problem + Solution ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 mb-12">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -43,7 +148,7 @@ export default function CustomerCase() {
 
             <div className="bg-bg-primary rounded-xl p-5 mb-6 border border-border">
               <div className="flex items-center gap-4 mb-3">
-                <div className="w-13 h-13 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center flex-shrink-0 w-12 h-12">
+                <div className="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center flex-shrink-0">
                   <span className="text-2xl">🏗</span>
                 </div>
                 <div>
@@ -74,7 +179,6 @@ export default function CustomerCase() {
             </ul>
           </motion.div>
 
-          {/* Solution */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -93,11 +197,11 @@ export default function CustomerCase() {
               {[
                 {
                   title: 'AI-offertgenerator',
-                  desc: 'Kunden fyller i ett formulär. AI genererar en komplett, professionell offert på under 5 minuter med Bergströms logotyp, prissättning och villkor.',
+                  desc: 'Kunden fyller i ett formulär. AI genererar en komplett offert på under 5 minuter med Bergströms logotyp, prissättning och villkor.',
                 },
                 {
                   title: 'Automatisk uppföljning',
-                  desc: 'Systemet skickar automatiska påminnelser efter 3 och 7 dagar om kunden inte svarat. Personliga, välformulerade meddelanden.',
+                  desc: 'Systemet skickar påminnelser efter 3 och 7 dagar om kunden inte svarat. Personliga, välformulerade meddelanden.',
                 },
                 {
                   title: 'Online-bokning',
@@ -105,7 +209,7 @@ export default function CustomerCase() {
                 },
                 {
                   title: 'Leadgenerering via sociala medier',
-                  desc: 'AI-skapad annons för Facebook och Instagram riktad mot husägare i Göteborgsregionen. A/B-testad och löpande optimerad.',
+                  desc: 'AI-skapade annonser för Facebook och Instagram riktade mot husägare i Göteborgsregionen. A/B-testade och löpande optimerade.',
                 },
               ].map((s) => (
                 <li key={s.title} className="flex gap-3">
@@ -120,30 +224,191 @@ export default function CustomerCase() {
           </motion.div>
         </div>
 
-        {/* Results */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          {results.map((r, i) => (
-            <motion.div
-              key={r.label}
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-white border border-border rounded-2xl p-6 text-center shadow-card hover:shadow-card-md transition-shadow"
-            >
-              <r.icon size={18} className="text-accent-orange mx-auto mb-2" />
-              <div className="text-3xl font-black gradient-text mb-1">{r.value}</div>
-              <div className="text-stone-400 text-xs">{r.label}</div>
-            </motion.div>
-          ))}
+        {/* ── Visual content we made: webpage hero ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 mb-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="section-label mb-3 block">Material vi skapade · 1/3</span>
+            <h3 className="text-3xl font-black tracking-tight mb-4 text-stone-900">
+              Ny hemsida med AI-genererad header
+            </h3>
+            <p className="text-stone-500 text-lg leading-relaxed mb-4">
+              Bergströms gamla hemsida hade en stockfoto-bild av ett färdigt hus.
+              Vi genererade en dramatisk nattvy av ett pågående bygge i Göteborg som
+              direkt kommunicerar professionalism och aktivitet.
+            </p>
+            <div className="bg-bg-primary border border-border rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles size={12} className="text-accent-orange"/>
+                <span className="text-stone-400 text-xs font-semibold">Prompt</span>
+              </div>
+              <p className="text-stone-600 text-xs italic">"Modern Swedish construction site at night, illuminated crane and building under construction, dramatic blue lighting, professional editorial photography style"</p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <ImageCard badge="Hemsida" tool="Midjourney v6">
+              <BuildingNight />
+            </ImageCard>
+          </motion.div>
         </div>
 
-        {/* Testimonial */}
+        {/* ── Text content we made: offert email ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <div className="mb-6">
+            <span className="section-label mb-3 block">Material vi skapade · 2/3</span>
+            <h3 className="text-3xl font-black tracking-tight mb-3 text-stone-900">
+              AI-genererade offertmejl och annonstexter
+            </h3>
+            <p className="text-stone-500 text-lg max-w-3xl">
+              Varje gång en kund fyller i Bergströms kontaktformulär genererar AI ett
+              komplett offertmejl. Här är ett verkligt exempel som skickades till en kund i Partille.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-card">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary">
+                <div className="flex items-center gap-2">
+                  <Sparkles size={14} className="text-accent-orange" />
+                  <span className="text-stone-700 font-medium text-sm">Offertmejl · auto-genererat</span>
+                </div>
+                <CopyButton text={emailText} />
+              </div>
+              <div className="p-6">
+                <pre className="text-stone-700 text-sm leading-relaxed whitespace-pre-wrap font-sans">{emailText}</pre>
+              </div>
+              <div className="px-6 pb-5">
+                <div className="bg-accent-orangePale border border-orange-200 rounded-lg px-4 py-2.5 text-accent-orange text-xs font-medium flex items-center gap-2">
+                  <Sparkles size={12} /> Genererad med Claude AI · Redigerad av Konstrukt
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-card">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary">
+                <div className="flex items-center gap-2">
+                  <Sparkles size={14} className="text-accent-orange" />
+                  <span className="text-stone-700 font-medium text-sm">Instagram-inlägg · sommarkampanj</span>
+                </div>
+                <CopyButton text={socialText} />
+              </div>
+              <div className="p-6">
+                <pre className="text-stone-700 text-sm leading-relaxed whitespace-pre-wrap font-sans">{socialText}</pre>
+              </div>
+              <div className="px-6 pb-5">
+                <div className="bg-accent-orangePale border border-orange-200 rounded-lg px-4 py-2.5 text-accent-orange text-xs font-medium flex items-center gap-2">
+                  <Sparkles size={12} /> Genererad med ChatGPT · Redigerad av Konstrukt
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Ads + Banner imagery ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <div className="mb-6">
+            <span className="section-label mb-3 block">Material vi skapade · 3/3</span>
+            <h3 className="text-3xl font-black tracking-tight mb-3 text-stone-900">
+              Annonser och kampanjmaterial
+            </h3>
+            <p className="text-stone-500 text-lg max-w-3xl">
+              Två AI-skapade visuella tillgångar som driver leadgenereringen.
+              Den vänstra annonsen körs på Facebook och Instagram, den högra
+              används som banner på Instagram Stories.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <ImageCard
+              badge="Facebook-annons"
+              tool="DALL-E 3"
+              title="Sommarkampanj 2024"
+              caption="A/B-testad mot tre varianter. Den här gav 3x högre CTR och 14 leads från ett enda inlägg."
+            >
+              <FacebookAd />
+            </ImageCard>
+            <ImageCard
+              badge="Instagram Stories"
+              tool="Canva AI + Midjourney"
+              title="Kampanjbanner"
+              caption="Snygg visuell hook med stark kontrast. Genererad på 10 minuter, justerad i Canva för rätt format."
+            >
+              <CampaignBanner />
+            </ImageCard>
+          </div>
+        </motion.div>
+
+        {/* ── Audio assets ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <div className="mb-6">
+            <span className="section-label mb-3 block">Ljud och röst</span>
+            <h3 className="text-3xl font-black tracking-tight mb-3 text-stone-900">
+              Jingle och voiceover för reklamfilm
+            </h3>
+            <p className="text-stone-500 text-lg max-w-3xl">
+              Två AI-genererade ljudtillgångar som används i reklamfilmen och i radiospot.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FakeAudio icon={Music} title="Bergström Bygg jingle (15s)" sub="Suno AI" color="#c2410c"/>
+            <FakeAudio icon={Mic} title="AI Voiceover reklamfilm (52s)" sub="ElevenLabs" color="#1d4ed8"/>
+          </div>
+        </motion.div>
+
+        {/* ── Results ── */}
+        <div className="mb-10">
+          <span className="section-label mb-3 block text-center">Resultat efter 6 månader</span>
+          <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-8 text-stone-900 text-center">
+            Det här hände
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {results.map((r, i) => (
+              <motion.div
+                key={r.label}
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="bg-white border border-border rounded-2xl p-6 text-center shadow-card hover:shadow-card-md transition-shadow"
+              >
+                <r.icon size={18} className="text-accent-orange mx-auto mb-2" />
+                <div className="text-3xl font-black gradient-text mb-1">{r.value}</div>
+                <div className="text-stone-400 text-xs">{r.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Testimonial ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-stone-900 rounded-2xl p-8 md:p-12"
+          className="bg-stone-900 rounded-2xl p-8 md:p-12 mb-8"
         >
           <div className="text-accent-orange text-4xl mb-5 font-serif">"</div>
           <blockquote className="text-xl md:text-2xl text-stone-100 font-light leading-relaxed mb-8 max-w-3xl">
@@ -162,12 +427,12 @@ export default function CustomerCase() {
           </div>
         </motion.div>
 
-        {/* Timeline */}
+        {/* ── Timeline ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-8 bg-white border border-border rounded-2xl p-8 shadow-card"
+          className="bg-white border border-border rounded-2xl p-8 shadow-card"
         >
           <h3 className="text-stone-900 font-bold text-lg mb-8 text-center">Tidslinje: Bergström Bygg AB</h3>
           <div className="relative">

@@ -41,9 +41,9 @@ export default function Footer() {
             <h4 className="text-stone-900 font-semibold mb-4 text-sm">Webbplats</h4>
             <ul className="space-y-2.5">
               {[
+                { label: 'Start', to: '/' },
                 { label: 'Kundcase', to: '/kundcase' },
-                { label: 'AI-material', to: '/material' },
-                { label: 'Om AI', to: '/om-ai' },
+                { label: 'Så använde vi AI', to: '/om-ai' },
                 { label: 'Boka samtal', to: '/kundcase' },
               ].map(({ label, to }) => (
                 <li key={label}>

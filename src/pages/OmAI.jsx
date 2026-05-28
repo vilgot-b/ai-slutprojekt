@@ -11,7 +11,7 @@ function PageHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label mb-3 block">Transparens</span>
+          <span className="section-label mb-3 block">Bakom kulisserna</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tight mb-5 text-stone-900">
             Så använde vi AI
             <br />

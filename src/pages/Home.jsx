@@ -3,6 +3,7 @@ import ProblemSection from '../components/ProblemSection'
 import ServicesSection from '../components/ServicesSection'
 import HowItWorks from '../components/HowItWorks'
 import CTASection from '../components/CTASection'
+import PromoVideo from '../components/PromoVideo'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Star } from 'lucide-react'
@@ -76,6 +77,7 @@ export default function Home() {
     <>
       <Hero />
       <ProblemSection />
+      <PromoVideo />
       <ServicesSection preview />
       <CaseTeaser />
       <HowItWorks />

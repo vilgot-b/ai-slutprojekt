@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Tjanster from './pages/Tjanster'
 import Kundcase from './pages/Kundcase'
-import Material from './pages/Material'
 import OmAI from './pages/OmAI'
 
 function ScrollToTop() {
@@ -22,8 +21,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/tjanster" element={<Tjanster />} />
           <Route path="/kundcase" element={<Kundcase />} />
-          <Route path="/material" element={<Material />} />
           <Route path="/om-ai" element={<OmAI />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
     </BrowserRouter>
