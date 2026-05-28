@@ -272,6 +272,7 @@ export default function CustomerCase() {
                   badge="Facebook-annons"
                   title="Sommarkampanj 2024"
                   caption="A/B-testad mot tre varianter. 3x högre CTR än stockfoto-annonsen."
+                  aspect="1/1"
                 >
                   <FacebookAd />
                 </ImageCard>
@@ -290,6 +291,7 @@ export default function CustomerCase() {
                   badge="Instagram Stories"
                   title="Kampanjbanner"
                   caption="Genererad på 10 minuter. 4 200 räckvidd och 14 leads från ett enda inlägg."
+                  aspect="1/1"
                 >
                   <InstagramPost />
                 </ImageCard>

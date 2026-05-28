@@ -4,43 +4,43 @@ import { Sparkles, Lightbulb, Code, Cloud, Video, Image as ImageIcon, MessageSqu
 const tools = [
   {
     name: 'ChatGPT',
-    use: 'Idégenerering',
-    desc: 'Brainstorming kring företagsnamn, tjänsteupplägg, kundcase och hur sidan skulle struktureras.',
+    use: 'Idéer',
+    desc: 'Jag använde det för att hitta på företagsnamn, vilka tjänster jag skulle ha med och hur sidan skulle se ut.',
     icon: MessageSquare,
     color: '#10a37f',
   },
   {
     name: 'Claude Design',
-    use: 'Design för företaget',
-    desc: 'Visuell riktning, färgpalett (varm orange + blå), typografi och layoutprinciper för hela sidan.',
+    use: 'Hur sidan ser ut',
+    desc: 'Jag fick hjälp att välja färger (varm orange och blå), text-stil och hur sidan skulle vara uppbyggd.',
     icon: Sparkles,
     color: '#c2410c',
   },
   {
     name: 'Claude Code',
-    use: 'Bygga hemsidan',
-    desc: 'All kod på sidan: React-komponenter, Tailwind-styling, Framer Motion-animationer och router-setup.',
+    use: 'Bygga sidan',
+    desc: 'All kod på sidan skrevs här: knappar, sektioner, rörelser och länkar mellan sidorna.',
     icon: Code,
     color: '#7c3aed',
   },
   {
     name: 'GitHub + Pages',
-    use: 'Hosta hemsidan',
-    desc: 'Versionshantering av koden och gratis hosting via GitHub Pages med automatisk deploy vid varje push.',
+    use: 'Lägga ut sidan på nätet',
+    desc: 'Jag sparar koden på GitHub. Pages gör att sidan finns gratis på nätet och uppdateras varje gång jag ändrar något.',
     icon: Cloud,
     color: '#1f2937',
   },
   {
     name: 'Steve.AI',
-    use: 'Video och röst',
-    desc: 'Reklamfilmen och AI-genererad voiceover på svenska. Animation, manus och röst i ett verktyg.',
+    use: 'Film och röst',
+    desc: 'Här gjorde jag reklamfilmen och en svensk röst som läser texten. Manus, bilder och röst i ett verktyg.',
     icon: Video,
     color: '#ea580c',
   },
   {
-    name: 'Midjourney + Gemini',
+    name: 'Gemini',
     use: 'Bilder',
-    desc: 'AI-genererade bilder till kundcaset: byggplatser, annonser, banners och varumärkesmaterial.',
+    desc: 'Jag gjorde alla bilder till kundcaset här: byggen, annonser och banners för Bergström Bygg.',
     icon: ImageIcon,
     color: '#1d4ed8',
   },
@@ -50,32 +50,32 @@ const reflections = [
   {
     icon: Brain,
     color: 'orange',
-    label: 'Vad använde du AI till?',
-    text: 'AI användes till i princip allt: idégenerering, kopia, design-riktlinjer, kod, illustrationer, video och voiceover. Jag använde AI som ett team av specialister där jag var redaktör och projektledare. ChatGPT för brainstorming, Claude Design för visuell riktning, Claude Code för att skriva all React-kod, Midjourney och Gemini för bilder, Steve.AI för video och voiceover, och GitHub Pages för att hosta resultatet.',
+    label: 'Vad använde jag AI till?',
+    text: 'Nästan allt. Jag använde AI för att hitta på idéer, skriva texterna, välja färger, skriva all kod, göra bilder, och göra reklamfilmen med röst. Jag tänkte på AI som ett team av experter där jag var chefen. Jag bestämde vad som skulle göras och kollade allt som kom tillbaka. ChatGPT hjälpte mig hitta på idéer, Claude Design valde färger och stil, Claude Code skrev koden, Gemini gjorde bilderna, Steve.AI gjorde filmen, och GitHub Pages lägger ut sidan på nätet.',
   },
   {
     icon: ThumbsUp,
     color: 'green',
-    label: 'Vilken del blev mest lyckad?',
-    text: 'Hemsidans struktur och kod blev otroligt bra med Claude Code. Det som hade tagit mig en vecka att bygga manuellt tog några timmar, och resultatet ser mer professionellt ut än vad jag hade kunnat göra själv. Animationerna och övergångarna mellan sektionerna känns polerade. Kundcasets storytelling, där text och bilder växlar, blev också riktigt bra.',
+    label: 'Vad blev bäst?',
+    text: 'Koden till hemsidan blev riktigt bra med Claude Code. Det som hade tagit mig en vecka att skriva själv tog några timmar, och sidan ser bättre ut än vad jag hade fixat på egen hand. Rörelserna när man scrollar känns fina. Kundcaset, där text och bilder byter av varandra, blev också snyggt.',
   },
   {
     icon: Wrench,
     color: 'blue',
-    label: 'Vad behövde du förbättra själv?',
-    text: 'Texterna. AI skrev för formellt och generiskt från början, med fraser som "Vi är glada att kunna presentera" och "Vi hoppas på ett givande samarbete". Jag fick gå igenom varje rubrik och stycke och korta ned, ta bort klichéer och göra tonen mer direkt. Också färgvalen, där AI ville köra på säkra blå-grå nyanser. Jag pushade för en varmare orange palett som passar byggbranschen bättre.',
+    label: 'Vad var jag tvungen att fixa själv?',
+    text: 'Texterna. AI skrev för fint och tråkigt i början, med saker som "Vi är glada att kunna presentera" och "Vi hoppas på ett givande samarbete". Jag fick gå igenom varje rubrik och stycke, korta ner och göra språket mer rakt på sak. Jag fick också ändra färgerna. AI ville köra säkra blå och gråa toner, men jag tyckte varm orange passade byggbranschen bättre.',
   },
   {
     icon: Lightbulb,
     color: 'amber',
-    label: 'Vilken del krävde mest eget tänkande?',
-    text: 'Att hitta vinkeln. Vad ska företaget heta, vem är målgruppen, vilket konkret problem löser vi och hur formulerar vi det så att en byggare i Göteborg faktiskt känner igen sig? AI kan generera tio förslag på en sekund, men jag behövde avgöra vilket som var trovärdigt och vilket som lät som marknadsföringssvammel. Också fiktionen kring Bergström Bygg, deras siffror måste vara realistiska och deras berättelse måste hänga ihop.',
+    label: 'Vad fick jag tänka mest på själv?',
+    text: 'Att hitta vinkeln. Vad ska företaget heta? Vem är det till för? Vilket problem löser jag? Hur säger jag det så att en byggare i Göteborg känner igen sig? AI kan ge mig tio förslag på en sekund, men jag fick välja vilka som lät trovärdiga och vilka som bara lät som reklam. Jag fick också hitta på Bergström Bygg själv så att siffrorna och berättelsen hängde ihop.',
   },
   {
     icon: AlertTriangle,
     color: 'red',
-    label: 'Vad blev dåligt först, och hur förbättrade du det?',
-    text: 'Bilderna. Första iterationen från Midjourney var generiska "construction stock photos" utan karaktär eller plats. Lösningen var mycket mer specifika prompts: tid på dygnet, väderlek, kameravinkel, platsspecifika detaljer som svenska skyltar och Göteborgsväder. Logotypen krävde fem omgångar innan den slutade se ut som clip-art. Reklamfilmen från Steve.AI fick också göras om en gång eftersom första versionen kändes som en bankreklam istället för byggreklam.',
+    label: 'Vad blev dåligt först, och hur fixade jag det?',
+    text: 'Bilderna. Första gången jag gjorde bilder med Gemini blev de bara vanliga "stockfoton" utan något speciellt. Jag fick skriva mycket mer detaljerade beskrivningar: tid på dagen, väder, vinkel, svenska skyltar och göteborgsväder. Logotypen fick jag göra om fem gånger innan den slutade se ut som en clip-art. Reklamfilmen från Steve.AI fick jag också göra om en gång, för första versionen kändes som en bankreklam istället för en byggreklam.',
   },
 ]
 
@@ -100,11 +100,11 @@ export default function AIDeclaration() {
         >
           <span className="section-label mb-3 block">Verktyg</span>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 text-stone-900">
-            Det här byggdes med
+            Det här byggde jag med
           </h2>
           <p className="text-stone-500 text-xl max-w-2xl mx-auto">
-            Sex AI-verktyg och en utvecklare. Allt från idégenerering till hosting
-            sköttes med hjälp av AI, men varje val granskades och justerades manuellt.
+            Sex AI-verktyg och jag. AI gjorde det mesta, från idéer till bilder och kod,
+            men jag kollade och ändrade allt själv innan det fick stå kvar.
           </p>
         </motion.div>
 
@@ -145,12 +145,12 @@ export default function AIDeclaration() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="section-label mb-3 block">Transparens</span>
+          <span className="section-label mb-3 block">Ärligt</span>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-5 text-stone-900">
-            En ärlig genomgång
+            Hur det faktiskt gick
           </h2>
           <p className="text-stone-500 text-xl max-w-2xl mx-auto">
-            Vad som fungerade, vad jag behövde göra om och vad som krävde mest eget tänkande.
+            Vad som blev bra, vad jag fick göra om och vad jag fick tänka mest på själv.
           </p>
         </motion.div>
 
@@ -185,10 +185,10 @@ export default function AIDeclaration() {
           className="mt-8 bg-stone-900 rounded-2xl p-8 text-center"
         >
           <p className="text-stone-300 text-lg leading-relaxed max-w-3xl mx-auto">
-            AI genererade <span className="text-white font-semibold">råmaterialet</span> men varje text,
-            bild och designval på den här sidan har{' '}
-            <span className="text-white font-semibold">granskats, redigerats och godkänts av mig.</span>{' '}
-            AI är ett verktyg. Kvaliteten beror på den som håller i verktyget.
+            AI gjorde <span className="text-white font-semibold">grovjobbet</span>, men varje text,
+            bild och färg på sidan har{' '}
+            <span className="text-white font-semibold">jag läst igenom, ändrat och godkänt själv.</span>{' '}
+            AI är bara ett verktyg. Hur bra det blir beror på den som håller i det.
           </p>
         </motion.div>
       </div>

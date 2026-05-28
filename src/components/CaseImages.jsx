@@ -152,23 +152,11 @@ export function BookingMockup() {
 // ── 4. AI-marknadsföring: Facebook-annons ─────────────────────────────────
 export function FacebookAd() {
   return (
-    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect width="400" height="240" fill="#fff7ed"/>
-      <rect width="400" height="55" fill="#ea580c"/>
-      <rect x="100" y="100" width="200" height="105" fill="#fbbf24" rx="2"/>
-      <polygon points="85,105 200,55 315,105" fill="#fcd34d"/>
-      <rect x="178" y="150" width="44" height="55" fill="#92400e" rx="2"/>
-      <rect x="120" y="118" width="36" height="28" fill="#bfdbfe" rx="2"/>
-      <rect x="244" y="118" width="36" height="28" fill="#bfdbfe" rx="2"/>
-      <rect x="0" y="190" width="400" height="50" fill="#d1fae5"/>
-      <rect x="15" y="10" width="190" height="16" rx="3" fill="white" opacity="0.9"/>
-      <rect x="15" y="31" width="130" height="12" rx="3" fill="white" opacity="0.6"/>
-      <rect x="280" y="7" width="105" height="42" rx="8" fill="white" opacity="0.95"/>
-      <text x="300" y="25" fill="#ea580c" fontSize="10" fontWeight="bold">GRATIS</text>
-      <text x="291" y="40" fill="#7c3aed" fontSize="8">KONSULTATION</text>
-      <rect x="130" y="205" width="140" height="26" rx="6" fill="#ea580c"/>
-      <text x="170" y="222" fill="white" fontSize="10" fontWeight="bold">Boka nu</text>
-    </svg>
+    <img
+      src={`${import.meta.env.BASE_URL}images/case-facebook.jpg`}
+      alt="Facebook-annons för Bergström Bygg AB"
+      className="w-full h-full object-cover"
+    />
   )
 }
 
@@ -207,28 +195,11 @@ export function GoogleAd() {
 // ── 6. Instagram-banner (social media) ────────────────────────────────────
 export function InstagramPost() {
   return (
-    <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <linearGradient id="igGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#1e3a5f"/>
-          <stop offset="100%" stopColor="#0f172a"/>
-        </linearGradient>
-      </defs>
-      <rect width="400" height="240" fill="url(#igGrad)"/>
-      <polygon points="0,240 80,110 160,240" fill="#c2410c" opacity="0.08"/>
-      <polygon points="240,0 400,0 400,130" fill="#1d4ed8" opacity="0.08"/>
-      <circle cx="340" cy="48" r="40" fill="#fbbf24" opacity="0.1"/>
-      <circle cx="340" cy="48" r="24" fill="#fbbf24" opacity="0.15"/>
-      <polygon points="140,170 200,125 260,170" fill="white" opacity="0.9"/>
-      <rect x="140" y="170" width="120" height="45" fill="white" opacity="0.9"/>
-      <rect x="181" y="188" width="38" height="27" fill="#1e3a5f" opacity="0.9"/>
-      <text x="35" y="55" fill="white" fontSize="21" fontWeight="900">SOMMAR</text>
-      <text x="35" y="82" fill="#fbbf24" fontSize="21" fontWeight="900">KAMPANJ 2024</text>
-      <text x="35" y="105" fill="#93c5fd" fontSize="10">Tillbyggnader · Altaner · Uterum</text>
-      <rect x="280" y="172" width="105" height="48" rx="8" fill="#fbbf24"/>
-      <text x="300" y="193" fill="#1e3a5f" fontSize="9" fontWeight="bold">GRATIS</text>
-      <text x="290" y="208" fill="#1e3a5f" fontSize="8">OFFERT INOM 24H</text>
-    </svg>
+    <img
+      src={`${import.meta.env.BASE_URL}images/case-instagram.jpg`}
+      alt="Instagram-story för Bergström Bygg AB"
+      className="w-full h-full object-cover"
+    />
   )
 }
 
@@ -337,10 +308,10 @@ export function DashboardMockup() {
 }
 
 // Wraps a placeholder with a label and metadata
-export function ImageCard({ children, badge, title, tool, caption }) {
+export function ImageCard({ children, badge, title, tool, caption, aspect = '16/9' }) {
   return (
     <div className="bg-white border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-md transition-shadow group">
-      <div className="relative bg-bg-primary overflow-hidden" style={{ aspectRatio: '16/9' }}>
+      <div className="relative bg-bg-primary overflow-hidden" style={{ aspectRatio: aspect }}>
         {children}
         {badge && (
           <span className="absolute top-3 left-3 text-xs font-bold bg-white/90 text-accent-orange border border-orange-200 rounded-full px-3 py-1">

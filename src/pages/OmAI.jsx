@@ -13,13 +13,13 @@ function PageHero() {
         >
           <span className="section-label mb-3 block">Bakom kulisserna</span>
           <h1 className="text-5xl md:text-6xl font-black tracking-tight mb-5 text-stone-900">
-            Så använde vi AI
+            Så använde jag AI
             <br />
             <span className="gradient-text">för att bygga det här</span>
           </h1>
           <p className="text-stone-500 text-xl max-w-2xl mx-auto">
-            Vilka verktyg, vad som fungerade och vad som behövde göras om.
-            Inga hemligheter om hur AI-materialet faktiskt skapades.
+            Vilka verktyg jag använde, vad som blev bra och vad jag fick göra om.
+            Inga hemligheter om hur jag gjorde materialet med AI.
           </p>
         </motion.div>
       </div>
