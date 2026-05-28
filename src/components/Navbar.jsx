@@ -55,15 +55,23 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <Link to="/om-ai" className="text-sm text-stone-500 hover:text-stone-800 font-medium transition-colors">
+          <a
+            href="#kontakt"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth' })
+            }}
+            className="text-sm text-stone-500 hover:text-stone-800 font-medium transition-colors cursor-pointer"
+          >
             Kontakt
-          </Link>
-          <Link
-            to="/kundcase"
+          </a>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('open-booking'))}
             className="bg-accent-orange hover:bg-accent-orangeLight text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors shadow-card"
           >
             Boka samtal
-          </Link>
+          </button>
         </div>
 
         <button className="md:hidden text-stone-600 hover:text-stone-900" onClick={() => setOpen(!open)}>
@@ -94,12 +102,13 @@ export default function Navbar() {
                   {l.label}
                 </NavLink>
               ))}
-              <Link
-                to="/kundcase"
+              <button
+                type="button"
+                onClick={() => { setOpen(false); window.dispatchEvent(new CustomEvent('open-booking')) }}
                 className="mt-2 bg-accent-orange text-white text-sm font-semibold px-4 py-3 rounded-lg text-center"
               >
                 Boka samtal
-              </Link>
+              </button>
             </div>
           </motion.div>
         )}

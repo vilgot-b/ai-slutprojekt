@@ -19,9 +19,9 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[Linkedin, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-stone-400 hover:text-accent-orange hover:border-accent-orange transition-colors">
+                <button key={i} type="button" className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-stone-400 cursor-default">
                   <Icon size={15} />
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -54,13 +54,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-stone-400 text-sm">2024 Konstrukt AB · Göteborg, Sverige</p>
-          <div className="flex gap-5">
-            {['Integritetspolicy', 'Villkor'].map((l) => (
-              <a key={l} href="#" className="text-stone-400 hover:text-stone-600 text-sm transition-colors">{l}</a>
-            ))}
-          </div>
+        <div className="border-t border-border pt-6">
+          <p className="text-stone-400 text-sm text-center sm:text-left">2024 Konstrukt AB · Göteborg, Sverige</p>
         </div>
       </div>
     </footer>

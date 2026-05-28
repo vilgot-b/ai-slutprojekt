@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { ArrowRight, Phone, Mail, Calendar } from 'lucide-react'
 
 export default function CTASection() {
@@ -35,14 +34,15 @@ export default function CTASection() {
           transition={{ delay: 0.2 }}
           className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
         >
-          <Link
-            to="/kundcase"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('open-booking'))}
             className="bg-accent-orange hover:bg-accent-orangeLight text-white font-bold px-9 py-4 rounded-xl transition-colors shadow-card-md text-lg flex items-center gap-2 justify-center group"
           >
             <Calendar size={20} />
             Boka kostnadsfritt samtal
             <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
-          </Link>
+          </button>
           <a
             href="tel:+46700000000"
             className="border border-stone-700 hover:border-stone-500 text-stone-300 hover:text-white font-bold px-9 py-4 rounded-xl transition-colors text-lg flex items-center gap-2 justify-center"
@@ -71,12 +71,11 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.45 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-sm mx-auto sm:max-w-none"
         >
           {[
-            { icon: Calendar, title: 'Boka online', value: 'konstrukt.ai/boka', desc: 'Välj tid i kalendern' },
-            { icon: Phone,    title: 'Ring oss',    value: '070-XXX XX XX',     desc: 'Mån-Fre 8-17' },
-            { icon: Mail,     title: 'E-post',      value: 'hej@konstrukt.ai',  desc: 'Svar inom 24h' },
+            { icon: Phone, title: 'Ring oss',  value: '070-XXX XX XX',   desc: 'Mån-Fre 8-17' },
+            { icon: Mail,  title: 'E-post',    value: 'hej@konstrukt.ai', desc: 'Svar inom 24h' },
           ].map(({ icon: Icon, title, value, desc }) => (
             <div key={title} className="bg-stone-800 border border-stone-700 rounded-xl p-5 text-center hover:border-stone-600 transition-colors">
               <Icon size={18} className="text-accent-orange mx-auto mb-2" />
