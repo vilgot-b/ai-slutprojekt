@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Sparkles, Lightbulb, Code, Cloud, Video, Image as ImageIcon, MessageSquare, Wrench, ThumbsUp, AlertTriangle, Brain } from 'lucide-react'
+import { Sparkles, Lightbulb, Code, Cloud, Video, Volume2, Image as ImageIcon, MessageSquare, Wrench, ThumbsUp, AlertTriangle, Brain } from 'lucide-react'
 
 const tools = [
   {
@@ -32,10 +32,24 @@ const tools = [
   },
   {
     name: 'Steve.AI',
-    use: 'Film och röst',
-    desc: 'Här gjorde jag reklamfilmen och en svensk röst som läser texten. Manus, bilder och röst i ett verktyg.',
+    use: 'Film',
+    desc: 'Här gjorde jag reklamfilmen med animationer och manus. Grundverkyget för att sätta ihop videon.',
     icon: Video,
     color: '#ea580c',
+  },
+  {
+    name: 'ElevenLabs',
+    use: 'Röst i videon',
+    desc: 'AI-genererad röst på svenska till reklamfilmen. Mycket bättre ljud än Steves inbyggda röst.',
+    icon: Volume2,
+    color: '#8b5cf6',
+  },
+  {
+    name: 'Suno.ai',
+    use: 'Bakgrundsmusik',
+    desc: 'Jag genererade bakgrundsmusiken till reklamfilmen här. Man beskriver vilken känsla man vill ha och får musik direkt.',
+    icon: Sparkles,
+    color: '#0891b2',
   },
   {
     name: 'Gemini',
@@ -75,7 +89,7 @@ const reflections = [
     icon: AlertTriangle,
     color: 'red',
     label: 'Vad blev dåligt först, och hur fixade jag det?',
-    text: 'Bilderna. Första gången jag gjorde bilder med Gemini blev de bara vanliga "stockfoton" utan något speciellt. Jag fick skriva mycket mer detaljerade beskrivningar: tid på dagen, väder, vinkel, svenska skyltar och göteborgsväder. Logotypen fick jag göra om fem gånger innan den slutade se ut som en clip-art. Reklamfilmen från Steve.AI fick jag också göra om en gång, för första versionen kändes som en bankreklam istället för en byggreklam.',
+    text: 'Bilderna. Första gången jag gjorde bilder med Gemini blev de bara vanliga "stockfoton" utan något speciellt. Jag fick skriva mycket mer detaljerade beskrivningar: tid på dagen, väder, vinkel, svenska skyltar och göteborgsväder. Logotypen fick jag göra om fem gånger innan den slutade se ut som en clip-art. Reklamfilmen fick jag också göra om en gång, för första versionen kändes som en bankreklam istället för en byggreklam. Det värsta var ljudet. Steve.AI:s inbyggda röst lät robotig och konstig på svenska, så jag lade in en röst från ElevenLabs istället. Det lät mycket bättre. Bakgrundsmusiken gjorde jag i Suno.ai.',
   },
 ]
 

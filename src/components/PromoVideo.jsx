@@ -5,7 +5,7 @@ import { Play, Volume2, VolumeX } from 'lucide-react'
 export default function PromoVideo() {
   const videoRef = useRef(null)
   const [playing, setPlaying] = useState(false)
-  const [muted, setMuted] = useState(true)
+  const [muted, setMuted] = useState(false)
   const [hasStarted, setHasStarted] = useState(false)
 
   const togglePlay = () => {
@@ -43,7 +43,7 @@ export default function PromoVideo() {
         >
           <span className="inline-block text-accent-orange text-xs font-bold tracking-widest uppercase mb-3">Reklamfilm</span>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-white">
-            Se Konstrukt på 60 sekunder
+            Se Konstrukt på 40 sekunder
           </h2>
           <p className="text-stone-400 text-xl max-w-xl mx-auto">
             En kort introduktion till vad vi gör och varför svenska byggföretag väljer oss.
@@ -69,20 +69,20 @@ export default function PromoVideo() {
             onEnded={() => setPlaying(false)}
           />
 
-          {/* Play overlay */}
+          {/* Play overlay — only shown before video starts */}
           {!hasStarted && (
-            <button
-              onClick={togglePlay}
-              className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
-              aria-label="Spela video"
-            >
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-accent-orange flex items-center justify-center shadow-card-lg group-hover:scale-110 transition-transform">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none">
+              <button
+                onClick={togglePlay}
+                className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-accent-orange flex items-center justify-center shadow-card-lg hover:scale-110 transition-transform pointer-events-auto"
+                aria-label="Spela video"
+              >
                 <Play size={36} className="text-white ml-1.5" fill="white" />
-              </div>
-            </button>
+              </button>
+            </div>
           )}
 
-          {/* Mute toggle */}
+          {/* Mute toggle — visible once video has started */}
           {hasStarted && (
             <button
               onClick={toggleMute}
@@ -93,7 +93,7 @@ export default function PromoVideo() {
             </button>
           )}
 
-          {/* Small overlay caption when paused after start */}
+          {/* Resume button when paused after start */}
           {hasStarted && !playing && (
             <button
               onClick={togglePlay}
@@ -114,7 +114,7 @@ export default function PromoVideo() {
           transition={{ delay: 0.3 }}
           className="text-center text-stone-500 text-xs mt-4"
         >
-          Producerad med Steve.AI · Voiceover och musik AI-genererad
+          Producerad med Steve.AI · Röst av ElevenLabs · Musik av Suno.ai
         </motion.p>
       </div>
     </section>
